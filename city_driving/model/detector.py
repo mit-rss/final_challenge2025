@@ -127,8 +127,7 @@ class Detector:
     
 def demo():
     import os
-    model = Detector(yolo_dir="/Users/alanyu/Downloads/non_dla", from_tensor_rt=False)
-    # model = Detector()
+    model = Detector()
     model.set_threshold(0.5)
     
     img_path = f"{os.path.dirname(__file__)}/../../media/minion.png" 
