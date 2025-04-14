@@ -1,22 +1,20 @@
 import rclpy
 from rclpy.node import Node
 
-import cv2
-from cv_bridge import CvBridge, CvBridgeError
+from cv_bridge import CvBridge
 
-import numpy as np
 from sensor_msgs.msg import Image
-from detector import StopSignDetector
+from .detector import Detector
 
-class SignDetector(Node):
+class DetectorNode(Node):
     def __init__(self):
-        super().__init__("stop_detector")
-        self.detector = StopSignDetector()
+        super().__init__("detector")
+        self.detector = Detector()
         self.publisher = None #TODO
         self.subscriber = self.create_subscription(Image, "/zed/zed_node/rgb/image_rect_color", self.callback, 1)
         self.bridge = CvBridge()
 
-        self.get_logger().info("Stop Detector Initialized")
+        self.get_logger().info("Detector Initialized")
 
     def callback(self, img_msg):
         # Process image with CV Bridge
@@ -26,7 +24,7 @@ class SignDetector(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    detector = SignDetector()
+    detector = DetectorNode()
     rclpy.spin(detector)
     rclpy.shutdown()
 
