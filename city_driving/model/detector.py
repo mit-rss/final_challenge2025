@@ -13,7 +13,7 @@ def _label_to_color(label):
 
 
 class Detector:
-    def __init__(self, yolo_dir="/root/.yolo", from_tensor_rt=True, threshold=0.5):
+    def __init__(self, yolo_dir="/root/yolo", from_tensor_rt=True, threshold=0.5):
         # local import
         from ultralytics import YOLO
         cls = YOLO
